@@ -10,3 +10,4 @@ C:\Users\Earl\Desktop\ProjectOS\ProjectOS\obj\Debug\net6.0\ProjectOS.dll
 C:\Users\Earl\Desktop\ProjectOS\ProjectOS\obj\Debug\net6.0\refint\ProjectOS.dll
 C:\Users\Earl\Desktop\ProjectOS\ProjectOS\obj\Debug\net6.0\ProjectOS.pdb
 C:\Users\Earl\Desktop\ProjectOS\ProjectOS\obj\Debug\net6.0\ref\ProjectOS.dll
+C:\Users\Earl\Desktop\ProjectOS\ProjectOS\obj\Debug\net6.0\ProjectOS.sourcelink.json

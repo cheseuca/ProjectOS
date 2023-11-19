@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectOS.Commands{
-    public class CommandManager{
+    internal class CommandManager{
         private List<Command> commands;
 
         public CommandManager()
@@ -16,7 +16,9 @@ namespace ProjectOS.Commands{
             this.commands.Add(new Restart("restart"));
             this.commands.Add(new Version("version"));
             this.commands.Add(new Clear("clear"));
-            
+            this.commands.Add(new File("file"));
+            this.commands.Add(new Directory("dir"));
+
             
         }
 

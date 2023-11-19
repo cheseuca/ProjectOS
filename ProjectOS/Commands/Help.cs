@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectOS.Commands
 {
-    public class Help : Command{
+    internal class Help : Command{
 
         public Help (String name) : base(name){ }
 

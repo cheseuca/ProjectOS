@@ -13,7 +13,7 @@ namespace ProjectOS.Commands
                 String response = "Restarting the system...";
                 Console.WriteLine(response);
                 Cosmos.System.Power.Reboot();
-                return response;
+                return "";
             }
     }
 }
