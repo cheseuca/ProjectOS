@@ -10,7 +10,7 @@ namespace ProjectOS.Commands{
 
         public CommandManager()
         {
-            commands = new List<Command>(5);
+            commands = new List<Command>(6);
             this.commands.Add(new Help("help"));
             this.commands.Add(new ShutDown("shutdown"));
             this.commands.Add(new Restart("restart"));
@@ -18,7 +18,7 @@ namespace ProjectOS.Commands{
             this.commands.Add(new Clear("clear"));
             this.commands.Add(new File("file"));
             this.commands.Add(new Directory("dir"));
-
+            this.commands.Add(new ChangeDirectory("cd"));
             
         }
 
