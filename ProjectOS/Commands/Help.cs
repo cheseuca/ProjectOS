@@ -10,8 +10,14 @@ namespace ProjectOS.Commands
 
         public Help (String name) : base(name){ }
 
-        public override String execute(String[] args){
-            return "Help command executed";
+        public override String execute(String[] args)
+        {
+            return @"
+            clear       To clear the text
+            restart     To reboot
+            shutdown    To turn off the system
+            version     To show the current verion";
+
         }
     }
 }
