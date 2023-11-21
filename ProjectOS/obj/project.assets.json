@@ -533,19 +533,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Windows 10\\.nuget\\packages\\": {}
+    "C:\\Users\\pjcca\\.nuget\\packages\\": {},
+    "D:\\vs sdk\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Windows 10\\source\\repos\\ProjectOS\\ProjectOS\\ProjectOS.csproj",
+      "projectUniqueName": "C:\\Users\\pjcca\\OneDrive\\Desktop\\os final\\ProjectOS\\ProjectOS.csproj",
       "projectName": "ProjectOS",
-      "projectPath": "C:\\Users\\Windows 10\\source\\repos\\ProjectOS\\ProjectOS\\ProjectOS.csproj",
-      "packagesPath": "C:\\Users\\Windows 10\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Windows 10\\source\\repos\\ProjectOS\\ProjectOS\\obj\\",
+      "projectPath": "C:\\Users\\pjcca\\OneDrive\\Desktop\\os final\\ProjectOS\\ProjectOS.csproj",
+      "packagesPath": "C:\\Users\\pjcca\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pjcca\\OneDrive\\Desktop\\os final\\ProjectOS\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\vs sdk\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Windows 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pjcca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -553,7 +558,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\Windows 10\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "C:\\Users\\pjcca\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -605,6 +611,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.25, 6.0.25]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.25, 6.0.25]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.25, 6.0.25]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
