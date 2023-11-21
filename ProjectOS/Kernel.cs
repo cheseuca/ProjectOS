@@ -25,7 +25,9 @@ namespace ProjectOS{
             }
             this.commandManager = new CommandManager();
 
-            Console.WriteLine("Welcome to ProjectOS");
+            Console.Clear();
+
+            Console.WriteLine("Welcome to ProjectOS\nType \"help\" for basic commands");
             
         }
 
