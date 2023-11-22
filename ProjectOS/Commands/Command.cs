@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectOS.Commands{
-    internal class Command{
+    public class Command{
         
         public readonly string name;
         

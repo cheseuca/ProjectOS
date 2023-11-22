@@ -20,6 +20,7 @@ namespace ProjectOS.Commands
             this.commands.Add(new Directory("dir"));
             // this.commands.Add(new ChangeDirectory("cd"));
             this.commands.Add(new MakeDir("mkdir"));
+            this.commands.Add(new LaunchGUI("gui"));
         }
 
         public String processInput(String input)
