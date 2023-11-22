@@ -533,19 +533,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Windows 10\\.nuget\\packages\\": {}
+    "C:\\Users\\Earl\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Windows 10\\Source\\Repos\\ProjectOS\\ProjectOS\\ProjectOS.csproj",
+      "projectUniqueName": "C:\\Users\\Earl\\Desktop\\ProjectOS\\ProjectOS\\ProjectOS.csproj",
       "projectName": "ProjectOS",
-      "projectPath": "C:\\Users\\Windows 10\\Source\\Repos\\ProjectOS\\ProjectOS\\ProjectOS.csproj",
-      "packagesPath": "C:\\Users\\Windows 10\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Windows 10\\Source\\Repos\\ProjectOS\\ProjectOS\\obj\\",
+      "projectPath": "C:\\Users\\Earl\\Desktop\\ProjectOS\\ProjectOS\\ProjectOS.csproj",
+      "packagesPath": "C:\\Users\\Earl\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Earl\\Desktop\\ProjectOS\\ProjectOS\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Windows 10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Earl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -553,7 +558,8 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\Windows 10\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "C:\\Users\\Earl\\AppData\\Roaming\\Cosmos User Kit\\packages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
