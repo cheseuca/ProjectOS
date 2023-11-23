@@ -187,6 +187,7 @@ namespace ProjectOS.Commands{
                         break;
                     }
                     break;
+
                 default:
                     response = "Unexpected argument: " + args[0];
                     break;

@@ -31,7 +31,21 @@ namespace ProjectOS.Commands{
             clear       To clear the text
             restart     To reboot
             shutdown    To turn off the system
-            version     To show the current verion";
+            version     To show the current verion
+            
+            file        file manamgement
+            input: file + command
+
+            command:
+            mkfile      make file 
+            mkdir       make directory
+            rmfile      remove file
+            rmdir       remove directory
+            writestr    write in a text file
+            readstr     read text file
+            space       read remaining space
+            lsdir       list of directories
+            lsfile      list of files in the directory";
 
         }
     }
