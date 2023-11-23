@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Sys = Cosmos.System;
+using System.Reflection.PortableExecutable;
+using Cosmos.System.FileSystem;
+using Cosmos.System.FileSystem.VFS;
 
 namespace ProjectOS.Commands{
     internal class File : Command{
@@ -17,10 +20,11 @@ namespace ProjectOS.Commands{
             
             String response = "";
 
-           //file create MyFile.txt
+           //file commands 
            switch (args[0])
             {
-                case "create":
+                // create file
+                case "mkfile":
                     try{
                         Sys.FileSystem.VFS.VFSManager.CreateFile(args[1]);
                         response = "Your file \"" + args[1] + "\" has been created";
@@ -31,8 +35,9 @@ namespace ProjectOS.Commands{
                         //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
-
-                case "del":
+                
+                // remove file from a directory
+                case "rmfile":
                     try
                     {
                         Sys.FileSystem.VFS.VFSManager.DeleteFile(args[1]);
@@ -45,8 +50,9 @@ namespace ProjectOS.Commands{
                         //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
-
-                case "createdir":
+                
+                // create directory
+                case "mkdir":
                     try
                     {
                         Sys.FileSystem.VFS.VFSManager.CreateDirectory(args[1]);
@@ -59,8 +65,9 @@ namespace ProjectOS.Commands{
                         //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
-
-                case "deldir":
+                
+                // remove directory and all files in it
+                case "rmdir":
                     try
                     {
                         Sys.FileSystem.VFS.VFSManager.DeleteDirectory(args[1], true) ;
@@ -73,7 +80,8 @@ namespace ProjectOS.Commands{
                         //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
-
+                
+                // write to txt file
                 case "writestr":
 
                     try{
@@ -109,7 +117,8 @@ namespace ProjectOS.Commands{
                         break;
                     }
                     break;
-
+                
+                // read txt file 
                 case "readstr":
 
                     try
@@ -136,6 +145,48 @@ namespace ProjectOS.Commands{
                     }
                     break;
 
+                // show available space in the disk
+                case "space":
+                    try
+                    {
+                        response = "Available space: " + Sys.FileSystem.VFS.VFSManager.GetAvailableFreeSpace(args[1]);
+                    }
+                    catch (Exception ex)
+                    {
+                        response = ex.ToString();
+                        break;
+                    }
+                    break;
+
+                // show list of directories in disk
+                case "lsdir":
+                    try
+                    {
+                        response = "Directories: " + Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
+                    }
+                    catch (Exception ex)
+                    {
+                        response = ex.ToString();
+                        break;
+                    }
+                    break;
+
+                // show list of files in directory
+                case "lsfile":
+                    try
+                    {
+                        var dirList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
+                        foreach (var dir in dirList)
+                        {
+                            Console.WriteLine(dir.mName);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response = ex.ToString();
+                        break;
+                    }
+                    break;
                 default:
                     response = "Unexpected argument: " + args[0];
                     break;
