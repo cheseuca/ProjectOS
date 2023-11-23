@@ -162,7 +162,18 @@ namespace ProjectOS.Commands{
                 case "lsdir":
                     try
                     {
-                        response = "Directories: " + Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
+                        List<Cosmos.System.FileSystem.Listing.DirectoryEntry> entryList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
+
+                        // Filter directories and select only their names
+                        List<string> directoryNames = entryList
+                            .Where(entry => entry.mEntryType == Cosmos.System.FileSystem.Listing.DirectoryEntryTypeEnum.Directory)
+                            .Select(entry => entry.mName)
+                            .ToList();
+
+                        foreach (var dirName in directoryNames)
+                        {
+                            Console.WriteLine(dirName);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -171,12 +182,13 @@ namespace ProjectOS.Commands{
                     }
                     break;
 
+
                 // show list of files in directory
                 case "lsfile":
                     try
                     {
-                        var dirList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
-                        foreach (var dir in dirList)
+                        var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
+                        foreach (var dir in fileList)
                         {
                             Console.WriteLine(dir.mName);
                         }
