@@ -5,16 +5,17 @@ using Sys = Cosmos.System;
 using ProjectOS.Commands;
 using Cosmos.System.FileSystem;
 
-
-namespace ProjectOS{
-    public class Kernel : Sys.Kernel{
-
+namespace ProjectOS
+{
+    public class Kernel : Cosmos.System.Kernel
+    {
         private CommandManager commandManager;
         private CosmosVFS vfs;
+        public static DateTime BootTime { get; private set; }
 
-
-        protected override void BeforeRun(){
-
+        protected override void BeforeRun()
+        {
+            BootTime = DateTime.Now;
             this.vfs = new CosmosVFS();
             try
             {
@@ -27,13 +28,18 @@ namespace ProjectOS{
             }
             this.commandManager = new CommandManager();
 
-            Console.Clear();
-
-            Console.WriteLine("Welcome to ProjectOS\nType \"help\" for basic commands");
             
+
+            Console.Clear();
+            
+
+            Console.WriteLine("\r\n     _    _      _                           \r\n    | |  | |    | |                          \r\n    | |  | | ___| | ___ ___  _ __ ___   ___  \r\n    | |/\\| |/ _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ \r\n    \\  /\\  /  __/ | (_| (_) | | | | | |  __/ \r\n     \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___| \r\n                                             \r\n                                             \r\n                  _____                      \r\n                 |_   _|                     \r\n                  | | ___                   \r\n                   | |/ _ \\                  \r\n                   | | (_) |                 \r\n                   \\_/\\___/                  \r\n                                             \r\n                                             \r\n      ______                _____ _____      \r\n      | ___ \\              |  _  /  ___|     \r\n      | |_/ /__ _ _ __ ___ | | | \\ `--.      \r\n      |    // _` | '_ ` _ \\| | | |`--. \\     \r\n      | |\\ \\ (_| | | | | | \\ \\_/ /\\__/ /     \r\n      \\_| \\_\\__,_|_| |_| |_|\\___/\\____/      \r\n                                             \r\n                                            \r\n");
+
+            Console.WriteLine("Type 'help' for a list of commands\n");
         }
 
-        protected override void Run(){
+        protected override void Run()
+        {
             while (true)
             {
                 String response;
@@ -45,13 +51,13 @@ namespace ProjectOS{
                 }
                 response = this.commandManager.processInput(input);
                 Console.WriteLine(response);
+
             }
-
         }
 
-        protected override void AfterRun()
-        {
-            Console.WriteLine("Shutdown");
-        }
+        //protected override void AfterRun()
+        //{
+        //    Console.WriteLine("Shutdown");
+        //}
     }
 }

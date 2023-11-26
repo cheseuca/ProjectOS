@@ -8,6 +8,8 @@ namespace ProjectOS.Commands{
     public class Command{
         
         public readonly string name;
+
+        public static SysInfo info;
         
         public Command(string name)
         {
@@ -90,7 +92,18 @@ namespace ProjectOS.Commands{
         public Version(String name) : base(name) { }
         public override String execute(String[] args)
         {
-            return "ProjectOS v0.0.1";
+            return "ProjectOS v1.0.0";
+        }
+    }
+
+    internal class getSysInfo : Command
+    {
+        public getSysInfo (String name) : base(name) { }
+
+        public override string execute(string[] args)
+        {
+            Command.info = new SysInfo();
+            return "System Info Generated";
         }
     }
 }
