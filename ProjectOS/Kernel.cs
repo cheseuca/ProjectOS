@@ -4,14 +4,13 @@ using System.Text;
 using Sys = Cosmos.System;
 using ProjectOS.Commands;
 using Cosmos.System.FileSystem;
-using ProjectOS.Graphics;
+
 
 namespace ProjectOS{
     public class Kernel : Sys.Kernel{
 
         private CommandManager commandManager;
         private CosmosVFS vfs;
-        public static GUI gui;
 
 
         protected override void BeforeRun(){
@@ -35,13 +34,6 @@ namespace ProjectOS{
         }
 
         protected override void Run(){
-
-            if (Kernel.gui != null)
-            {
-
-                Kernel.gui.handleGUIInputs();
-                return;
-            }
             while (true)
             {
                 String response;
@@ -55,6 +47,11 @@ namespace ProjectOS{
                 Console.WriteLine(response);
             }
 
+        }
+
+        protected override void AfterRun()
+        {
+            Console.WriteLine("Shutdown");
         }
     }
 }

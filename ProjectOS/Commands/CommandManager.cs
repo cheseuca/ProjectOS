@@ -18,7 +18,6 @@ namespace ProjectOS.Commands
             this.commands.Add(new Clear("clear"));
             this.commands.Add(new File("file"));
             this.commands.Add(new Directory("dir"));
-            this.commands.Add(new LaunchGUI("gui"));
         }
 
         public String processInput(String input)
