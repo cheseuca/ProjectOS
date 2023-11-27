@@ -49,10 +49,10 @@ namespace ProjectOS.Applications
                     System.Console.WriteLine(result + ans);
                     break;
                 default:
-                    System.Console.WriteLine("Error! To retry type \"1\"");
+                    System.Console.WriteLine("Error! Try Again!");
                     break;
             }
-            System.Console.WriteLine("Type \"1\" to Continue or type \"2\" to Exit Calculator");
+            System.Console.WriteLine("Type \"1\" to Retry/Continue or type \"2\" to Exit Calculator");
             string user_input = System.Console.ReadLine();
             if (user_input != null)
             {
@@ -64,13 +64,13 @@ namespace ProjectOS.Applications
                 else if (user_input == "2")
                 {
                     System.Console.Clear();
-                    System.Console.WriteLine("Welcome to ProjectOS\nType \"help\" for basic commands");
+                    System.Console.WriteLine("Welcome to ProjectOS\nType \"help\" for a list of commands");
                 }
                 }
-                else
-                {
+            else
+            {
                     System.Console.WriteLine("Error!");
-                }
+            }
             
 
 
@@ -78,10 +78,10 @@ namespace ProjectOS.Applications
         void CalculatorCLI()
         {
             System.Console.WriteLine("==========================");
-            System.Console.WriteLine("||\tCalculator\t||");
+            System.Console.WriteLine("||  \tCalculator  \t||");
             System.Console.WriteLine("==========================");
-            System.Console.WriteLine("||\t\tOperators\t\t||");
-            System.Console.WriteLine("||\t\t+  -  *  -   \t\t||");
+            System.Console.WriteLine("||  \t Operators  \t||");
+            System.Console.WriteLine("|| \t+  -  *  -   \t||");
             System.Console.WriteLine("==========================");
             System.Console.Write("Enter 1st Number: ");
             num1 = double.Parse(System.Console.ReadLine());

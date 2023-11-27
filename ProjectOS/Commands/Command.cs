@@ -62,7 +62,7 @@ namespace ProjectOS.Commands{
         public override String execute(String[] args)
         {
             Console.Clear();
-            return "Welcome to ProjectOS\nType \"help\" for basic commands";
+            return "Welcome to ProjectOS\nType \"help\" for a list of commands";
         }
     }
 
@@ -75,7 +75,7 @@ namespace ProjectOS.Commands{
             String response = "Restarting the system...";
             Console.WriteLine(response);
             Cosmos.System.Power.Reboot();
-            return "Welcome to ProjectOS\nType \"help\" for basic commands";
+            return "Welcome to ProjectOS\nType \"help\" for a list of commands";
         }
     }
 
