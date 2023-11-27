@@ -47,7 +47,10 @@ namespace ProjectOS.Commands{
             readstr     read text file
             space       read remaining space
             lsdir       list of directories
-            lsfile      list of files in the directory";
+            lsfile      list of files in the directory
+            
+            calc        to open the calculator application";
+
 
         }
     }

@@ -21,6 +21,7 @@ namespace ProjectOS.Commands
             this.commands.Add(new ConsoleForeground("foreground"));
             this.commands.Add(new ConsoleBackground("background"));
             this.commands.Add(new getSysInfo("sysinfo"));
+            this.commands.Add(new Applications.Calc("calc"));
         }
 
         public String processInput(String input)

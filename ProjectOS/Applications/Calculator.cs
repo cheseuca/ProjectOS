@@ -1,4 +1,5 @@
 ﻿using Cosmos.System;
+using ProjectOS.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,23 @@ using System.Threading.Tasks;
 
 namespace ProjectOS.Applications
 {
+    internal class Calc : Command
+    {
+        public Calc(string name) : base(name) { }
+        public override string execute(string[] args)
+        {
+            System.Console.Clear();
+            Calculator calculator = new Calculator();
+            return " ";
+        }
+    }
+    
     internal class Calculator
     {
-        static double num1 = 0;
-        static double num2 = 0;
-        static double ans = 0;
-        static string op;
+        double num1 = 0;
+        double num2 = 0;
+        double ans = 0;
+        string op;
         public Calculator()
         {
             string result = "=\t ";
@@ -37,10 +49,10 @@ namespace ProjectOS.Applications
                     System.Console.WriteLine(result + ans);
                     break;
                 default:
-                    System.Console.WriteLine("Error");
+                    System.Console.WriteLine("Error! To retry type \"1\"");
                     break;
             }
-            System.Console.WriteLine("Type 1 to Continue or type 2 to Exit Calculator");
+            System.Console.WriteLine("Type \"1\" to Continue or type \"2\" to Exit Calculator");
             string user_input = System.Console.ReadLine();
             if (user_input != null)
             {
@@ -52,13 +64,14 @@ namespace ProjectOS.Applications
                 else if (user_input == "2")
                 {
                     System.Console.Clear();
-
+                    System.Console.WriteLine("Welcome to ProjectOS\nType \"help\" for basic commands");
                 }
-            }
-            else
-            {
-                System.Console.WriteLine("Error");
-            }
+                }
+                else
+                {
+                    System.Console.WriteLine("Error!");
+                }
+            
 
 
         }
@@ -67,8 +80,8 @@ namespace ProjectOS.Applications
             System.Console.WriteLine("==========================");
             System.Console.WriteLine("||\tCalculator\t||");
             System.Console.WriteLine("==========================");
-            System.Console.WriteLine("||\tOperators\t||");
-            System.Console.WriteLine("||\t+  -  *  -   \t||");
+            System.Console.WriteLine("||\t\tOperators\t\t||");
+            System.Console.WriteLine("||\t\t+  -  *  -   \t\t||");
             System.Console.WriteLine("==========================");
             System.Console.Write("Enter 1st Number: ");
             num1 = double.Parse(System.Console.ReadLine());
