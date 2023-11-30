@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Use VMware Player or Workstation to deploy and debug.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b2376e114e0ee3bfb9db50995c734906ceae6d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fbfa5cd60b0f21e9efd948172228e34a216fce71")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjectOS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjectOS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
