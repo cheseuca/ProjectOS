@@ -23,6 +23,7 @@ namespace ProjectOS.Commands
             this.commands.Add(new getSysInfo("sysinfo"));
             this.commands.Add(new Applications.Calc("calc"));
             this.commands.Add(new Applications.Hangman("hangman"));
+            this.commands.Add(new Applications.NumberGuessingGame("feelinglucky"));
         }
 
         public String processInput(String input)
