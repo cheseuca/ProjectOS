@@ -75,8 +75,14 @@ namespace ProjectOS
             {
                 key = Console.ReadKey(true);
 
-                // Ignore any key that is not a printable character
-                if (!char.IsControl(key.KeyChar))
+                // Process backspace
+                if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+                {
+                    Console.Write("\b \b"); // Move the cursor back, write a space, move the cursor back again
+                    password.Remove(password.Length - 1, 1);
+                }
+                // Ignore any key that is not a printable character or backspace
+                else if (!char.IsControl(key.KeyChar))
                 {
                     password.Append(key.KeyChar);
                     Console.Write("*"); // Display '*' instead of the actual character
@@ -92,6 +98,7 @@ namespace ProjectOS
             // For demonstration purposes, using hardcoded values (user = admin, password = adminisme)
             return username == "admin" && password == "adminisme";
         }
+
 
 
     }
