@@ -9,7 +9,8 @@ namespace ProjectOS.Commands
         private List<Command> commands;
 
         public CommandManager()
-        {
+        {   
+            // ignore this
             commands = new List<Command>(8);
             this.commands.Add(new Help("help"));
             this.commands.Add(new ShutDown("shutdown"));
@@ -28,7 +29,7 @@ namespace ProjectOS.Commands
 
         public String processInput(String input)
         {
-            Console.WriteLine("### Input received: '" + input + "'"); // Add this line for debugging
+            Console.WriteLine("### Input received: '" + input + "'"); // Added this line for debugging
 
             String[] split = input.Split(' ');
 

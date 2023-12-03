@@ -28,11 +28,8 @@ namespace ProjectOS
             }
             this.commandManager = new CommandManager();
 
-            
-
             Console.Clear();
             
-
             Console.WriteLine("\r\n     _    _      _                           \r\n    | |  | |    | |                          \r\n    | |  | | ___| | ___ ___  _ __ ___   ___  \r\n    | |/\\| |/ _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ \r\n    \\  /\\  /  __/ | (_| (_) | | | | | |  __/ \r\n     \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___| \r\n                                             \r\n                                             \r\n                  _____                      \r\n                 |_   _|                     \r\n                  | | ___                   \r\n                   | |/ _ \\                  \r\n                   | | (_) |                 \r\n                   \\_/\\___/                  \r\n                                             \r\n                                             \r\n      ______                _____ _____      \r\n      | ___ \\              |  _  /  ___|     \r\n      | |_/ /__ _ _ __ ___ | | | \\ `--.      \r\n      |    // _` | '_ ` _ \\| | | |`--. \\     \r\n      | |\\ \\ (_| | | | | | \\ \\_/ /\\__/ /     \r\n      \\_| \\_\\__,_|_| |_| |_|\\___/\\____/      \r\n                                             \r\n                                            \r\n");
 
             Console.WriteLine("Type 'help' for a list of commands\n");
@@ -40,24 +37,62 @@ namespace ProjectOS
 
         protected override void Run()
         {
-            while (true)
-            {
-                String response;
-                Console.Write(">: ");
-                String input = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(input))
-                {
-                    continue;
-                }
-                response = this.commandManager.processInput(input);
-                Console.WriteLine(response);
+            Console.Write("Username: ");
+            string usernameInput = Console.ReadLine();
 
+            Console.Write("Password: ");
+            string passwordInput = ReadPasswordInput();
+
+            if (AuthenticateUser(usernameInput, passwordInput))
+            {
+                Console.WriteLine("Authentication successful!");
+
+                // Continue with the rest of the code or execute specific commands for authenticated users
+                while (true)
+                {
+                    String response;
+                    Console.Write(">: ");
+                    String input = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        continue;
+                    }
+                    response = this.commandManager.processInput(input);
+                    Console.WriteLine(response);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Authentication failed. Please try again.");
             }
         }
 
-        //protected override void AfterRun()
-        //{
-        //    Console.WriteLine("Shutdown");
-        //}
+        private string ReadPasswordInput()
+        {
+            StringBuilder password = new StringBuilder();
+            ConsoleKeyInfo key;
+            do
+            {
+                key = Console.ReadKey(true);
+
+                // Ignore any key that is not a printable character
+                if (!char.IsControl(key.KeyChar))
+                {
+                    password.Append(key.KeyChar);
+                    Console.Write("*"); // Display '*' instead of the actual character
+                }
+            } while (key.Key != ConsoleKey.Enter);
+
+            Console.WriteLine(); // Move to the next line after entering the password
+            return password.ToString();
+        }
+
+        private bool AuthenticateUser(string username, string password)
+        {
+            // For demonstration purposes, using hardcoded values (user = admin, password = adminisme)
+            return username == "admin" && password == "adminisme";
+        }
+
+
     }
 }
