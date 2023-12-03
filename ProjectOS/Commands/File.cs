@@ -170,10 +170,15 @@ namespace ProjectOS.Commands{
                             .Select(entry => entry.mName)
                             .ToList();
 
+                        Console.WriteLine("Directory list: {0}:", args[1]);
+                        Console.WriteLine(new string('=', 73)); 
+
                         foreach (var dirName in directoryNames)
                         {
-                            Console.WriteLine(dirName);
+                            Console.WriteLine($"=   > {dirName}");
                         }
+
+                        Console.WriteLine(new string('=', 73)); 
                     }
                     catch (Exception ex)
                     {
@@ -181,17 +186,25 @@ namespace ProjectOS.Commands{
                         break;
                     }
                     break;
-
 
                 // show list of files in directory
                 case "lsfile":
                     try
                     {
                         var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
-                        foreach (var dir in fileList)
+
+                        Console.WriteLine("File list in directory: {0}:", args[1]);
+                        Console.WriteLine(new string('=', 73)); 
+
+                        foreach (var fileEntry in fileList)
                         {
-                            Console.WriteLine(dir.mName);
+                            if (fileEntry.mEntryType == Cosmos.System.FileSystem.Listing.DirectoryEntryTypeEnum.File)
+                            {
+                                Console.WriteLine($"=   > {fileEntry.mName}");
+                            }
                         }
+
+                        Console.WriteLine(new string('=', 73)); 
                     }
                     catch (Exception ex)
                     {
@@ -199,6 +212,7 @@ namespace ProjectOS.Commands{
                         break;
                     }
                     break;
+
 
                 default:
                     response = "Unexpected argument: " + args[0];

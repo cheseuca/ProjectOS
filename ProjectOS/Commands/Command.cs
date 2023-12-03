@@ -47,7 +47,10 @@ namespace ProjectOS.Commands{
             readstr     read text file
             space       read remaining space
             lsdir       list of directories
-            lsfile      list of files in the directory";
+            lsfile      list of files in the directory
+            
+            calc        to open the calculator application";
+
 
         }
     }
@@ -59,7 +62,7 @@ namespace ProjectOS.Commands{
         public override String execute(String[] args)
         {
             Console.Clear();
-            return "Welcome to ProjectOS\nType \"help\" for basic commands";
+            return "Welcome to ProjectOS\nType \"help\" for a list of commands";
         }
     }
 
@@ -72,7 +75,7 @@ namespace ProjectOS.Commands{
             String response = "Restarting the system...";
             Console.WriteLine(response);
             Cosmos.System.Power.Reboot();
-            return "Welcome to ProjectOS\nType \"help\" for basic commands";
+            return "Welcome to ProjectOS\nType \"help\" for a list of commands";
         }
     }
 
