@@ -18,10 +18,11 @@ namespace ProjectOS.Commands{
         }
         public override String execute(String[] args) { 
             
-            String response = "";
+           String response = "";
+           string currentDirectory = @"0:\";
 
-           //file commands 
-           switch (args[0])
+            //file commands 
+            switch (args[0])
             {
                 // create file
                 case "mkfile":
@@ -212,6 +213,29 @@ namespace ProjectOS.Commands{
                         break;
                     }
                     break;
+
+                // change directory
+                case "cd":
+                    try
+                    {
+                        string newDirectory = Path.Combine(currentDirectory, args[1]);
+                        if (Directory.Exists(newDirectory))
+                        {
+                            currentDirectory = newDirectory;
+                            response = "Current directory changed to: " + currentDirectory;
+                        }
+                        else
+                        {
+                            response = "Directory does not exist" + newDirectory;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response = ex.ToString();
+                        break;
+                    }
+                    break;
+
 
 
                 default:
