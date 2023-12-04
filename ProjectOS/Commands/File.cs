@@ -19,7 +19,7 @@ namespace ProjectOS.Commands{
         public override String execute(String[] args) { 
             
            String response = "";
-           string currentDirectory = @"0:\";
+           string currentDirectory = @"0:\testtwo";
 
             //file commands 
             switch (args[0])
@@ -214,29 +214,92 @@ namespace ProjectOS.Commands{
                     }
                     break;
 
-                // change directory
+                // change directory 
                 case "cd":
                     try
                     {
-                        string newDirectory = Path.Combine(currentDirectory, args[1]);
-                        if (Directory.Exists(newDirectory))
+                        if (args.Length >= 2 && args[0].ToLower() == "cd")
                         {
-                            currentDirectory = newDirectory;
-                            response = "Current directory changed to: " + currentDirectory;
+                            string newDirectory = Path.Combine(currentDirectory, args[1]);
+                            if (Sys.FileSystem.VFS.VFSManager.DirectoryExists(newDirectory))
+                            {
+                                currentDirectory = newDirectory;
+                                response = "Current directory changed to: " + currentDirectory;
+                            }
+                            else
+                            {
+                                response = "Directory does not exist: " + newDirectory;
+                            }
                         }
                         else
                         {
-                            response = "Directory does not exist" + newDirectory;
+                            response = "Invalid 'cd' command format. Usage: file cd <directory>";
                         }
                     }
                     catch (Exception ex)
                     {
-                        response = ex.ToString();
-                        break;
+                        response = "Exception: " + ex.Message;
                     }
                     break;
 
+                // move the file from default directory to another directory
+                // ...
 
+                case "mvfile":
+                    try
+                    {
+                        if (args.Length >= 3 && args[0].ToLower() == "mvfile")
+                        {
+                            string sourceFile = Path.Combine(currentDirectory, args[1]);
+                            string destinationDirectory = Path.Combine(currentDirectory, args[2]);
+
+                            // Check if the source file exists
+                            if (Sys.FileSystem.VFS.VFSManager.FileExists(sourceFile))
+                            {
+                                // Check if the destination directory exists
+                                if (Sys.FileSystem.VFS.VFSManager.DirectoryExists(destinationDirectory))
+                                {
+                                    // Build the full path for the destination file
+                                    string destinationFile = Path.Combine(destinationDirectory, args[1]);
+
+                                    // Read content from the source file
+                                    string fileContent;
+                                    using (var reader = new StreamReader(sourceFile))
+                                    {
+                                        fileContent = reader.ReadToEnd();
+                                    }
+
+                                    // Write content to the destination file
+                                    using (var writer = new StreamWriter(destinationFile))
+                                    {
+                                        writer.Write(fileContent);
+                                    }
+
+                                    // Optionally, delete the original file
+                                    Sys.FileSystem.VFS.VFSManager.DeleteFile(sourceFile);
+
+                                    response = "File moved successfully to: " + destinationFile;
+                                }
+                                else
+                                {
+                                    response = "Destination directory does not exist: " + destinationDirectory;
+                                }
+                            }
+                            else
+                            {
+                                response = "Source file does not exist: " + sourceFile;
+                            }
+                        }
+                        else
+                        {
+                            response = "Invalid 'mvfile' command format. Usage: file mvfile <source_file> <destination_directory>";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response = "Exception: " + ex.Message;
+                    }
+                    break;
 
                 default:
                     response = "Unexpected argument: " + args[0];
