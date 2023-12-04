@@ -9,34 +9,39 @@ using System.Reflection.PortableExecutable;
 using Cosmos.System.FileSystem;
 using Cosmos.System.FileSystem.VFS;
 
-namespace ProjectOS.Commands{
-    internal class File : Command{
+namespace ProjectOS.Commands
+{
+    internal class File : Command
+    {
         public File(String name) : base(name)
         {
             //this.description = "Create a file";
             //this.usage = "file [name]";
         }
-        public override String execute(String[] args) { 
-            
-           String response = "";
-           string currentDirectory = @"0:\testtwo";
+        public override String execute(String[] args)
+        {
+
+            String response = "";
+            string currentDirectory = @"0:\";
 
             //file commands 
             switch (args[0])
             {
                 // create file
                 case "mkfile":
-                    try{
-                        Sys.FileSystem.VFS.VFSManager.CreateFile(args[1]);
+                    try
+                    {
+                        Sys.FileSystem.VFS.VFSManager.CreateFile(Path.Combine(currentDirectory, args[1]));
                         response = "Your file \"" + args[1] + "\" has been created";
                     }
-                    catch (Exception ex){
+                    catch (Exception ex)
+                    {
                         response = ex.ToString();
                         break;
                         //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
-                
+
                 // remove file from a directory
                 case "rmfile":
                     try
@@ -51,7 +56,7 @@ namespace ProjectOS.Commands{
                         //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
-                
+
                 // create directory
                 case "mkdir":
                     try
@@ -66,12 +71,12 @@ namespace ProjectOS.Commands{
                         //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
-                
+
                 // remove directory and all files in it
                 case "rmdir":
                     try
                     {
-                        Sys.FileSystem.VFS.VFSManager.DeleteDirectory(args[1], true) ;
+                        Sys.FileSystem.VFS.VFSManager.DeleteDirectory(args[1], true);
                         response = "Your directory \"" + args[1] + "\" has been deleted";
                     }
                     catch (Exception ex)
@@ -81,14 +86,16 @@ namespace ProjectOS.Commands{
                         //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
-                
+
                 // write to txt file
                 case "writestr":
 
-                    try{
+                    try
+                    {
                         FileStream fs = (FileStream)Sys.FileSystem.VFS.VFSManager.GetFile(args[1]).GetFileStream();
 
-                        if (fs.CanWrite){
+                        if (fs.CanWrite)
+                        {
                             int count = 0;
                             StringBuilder sb = new StringBuilder();
                             foreach (String s in args)
@@ -107,18 +114,20 @@ namespace ProjectOS.Commands{
                             response = "Succesfully wrote to file";
                         }
 
-                        else{
+                        else
+                        {
                             response = "Unable to write file: Not open for writing";
                             break;
                         }
                     }
 
-                    catch (Exception ex){
+                    catch (Exception ex)
+                    {
                         response = ex.ToString();
                         break;
                     }
                     break;
-                
+
                 // read txt file 
                 case "readstr":
 
@@ -140,8 +149,9 @@ namespace ProjectOS.Commands{
                         }
                     }
 
-                    catch (Exception ex) {
-                        response= ex.ToString();
+                    catch (Exception ex)
+                    {
+                        response = ex.ToString();
                         break;
                     }
                     break;
@@ -172,14 +182,14 @@ namespace ProjectOS.Commands{
                             .ToList();
 
                         Console.WriteLine("Directory list: {0}:", args[1]);
-                        Console.WriteLine(new string('=', 73)); 
+                        Console.WriteLine(new string('=', 73));
 
                         foreach (var dirName in directoryNames)
                         {
                             Console.WriteLine($"=   > {dirName}");
                         }
 
-                        Console.WriteLine(new string('=', 73)); 
+                        Console.WriteLine(new string('=', 73));
                     }
                     catch (Exception ex)
                     {
@@ -195,7 +205,7 @@ namespace ProjectOS.Commands{
                         var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
 
                         Console.WriteLine("File list in directory: {0}:", args[1]);
-                        Console.WriteLine(new string('=', 73)); 
+                        Console.WriteLine(new string('=', 73));
 
                         foreach (var fileEntry in fileList)
                         {
@@ -205,7 +215,7 @@ namespace ProjectOS.Commands{
                             }
                         }
 
-                        Console.WriteLine(new string('=', 73)); 
+                        Console.WriteLine(new string('=', 73));
                     }
                     catch (Exception ex)
                     {
@@ -243,8 +253,6 @@ namespace ProjectOS.Commands{
                     break;
 
                 // move the file from default directory to another directory
-                // ...
-
                 case "mvfile":
                     try
                     {

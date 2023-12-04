@@ -78,7 +78,9 @@ namespace ProjectOS
                 // Process backspace
                 if (key.Key == ConsoleKey.Backspace && password.Length > 0)
                 {
-                    Console.Write("\b \b"); // Move the cursor back, write a space, move the cursor back again
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop); 
+                    Console.Write(" "); 
+                    Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop); 
                     password.Remove(password.Length - 1, 1);
                 }
                 // Ignore any key that is not a printable character or backspace
@@ -92,6 +94,7 @@ namespace ProjectOS
             Console.WriteLine(); // Move to the next line after entering the password
             return password.ToString();
         }
+
 
         private bool AuthenticateUser(string username, string password)
         {
