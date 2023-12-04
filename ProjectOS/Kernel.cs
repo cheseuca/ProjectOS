@@ -4,6 +4,7 @@ using System.Text;
 using Sys = Cosmos.System;
 using ProjectOS.Commands;
 using Cosmos.System.FileSystem;
+using Cosmos.HAL;
 
 namespace ProjectOS
 {
@@ -11,11 +12,20 @@ namespace ProjectOS
     {
         private CommandManager commandManager;
         private CosmosVFS vfs;
-        public static DateTime BootTime { get; private set; }
+
+        public static int bootHour { get; private set; }
+        public static int bootMinute { get; private set; }
+        public static int bootSecond { get; private set; }
+        public static string bootTime { get; private set; }
+
 
         protected override void BeforeRun()
         {
-            BootTime = DateTime.Now;
+            bootHour = RTC.Hour;
+            bootMinute = RTC.Minute;
+            bootSecond = RTC.Second;
+            bootTime = $"Boot Time: {bootHour:D2}:{bootMinute:D2}:{bootSecond:D2}";
+
             this.vfs = new CosmosVFS();
             try
             {

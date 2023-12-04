@@ -25,6 +25,7 @@ namespace ProjectOS.Commands
             this.commands.Add(new Applications.Calc("calc"));
             this.commands.Add(new Applications.Hangman("hangman"));
             this.commands.Add(new Applications.NumberGuessingGame("feelinglucky"));
+            this.commands.Add(new DateTime ("datetime"));
         }
 
         public String processInput(String input)
