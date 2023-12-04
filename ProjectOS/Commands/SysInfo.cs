@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 using Cosmos.Core;
 using ProjectOS;
 using Cosmos.HAL;
+using Cosmos.System.Graphics;
+using Cosmos.System.Network;
+using System.Net.Sockets;
+using System.Net;
 
 namespace ProjectOS.Commands
 {
@@ -19,29 +23,27 @@ namespace ProjectOS.Commands
         static int uptimeHour = RTC.Hour - Kernel.bootHour;
         static int uptimeMinute = RTC.Minute - Kernel.bootMinute;
         static int uptimeSecond = RTC.Second - Kernel.bootSecond;
+        public static bool IsVirtualized { get; set; } = true;
+
 
         public SysInfo()
             {
             Console.WriteLine();
-            Console.WriteLine("System Specifications:", ConsoleColor.Yellow);
-            Console.WriteLine($"CPU: {CPU.GetCPUBrandString()}", ConsoleColor.Yellow);
-            Console.WriteLine($"RAM: {usedmem}/{maxmem}MB", ConsoleColor.Yellow);
-            Console.WriteLine($"Time at boot: {Kernel.bootTime}", ConsoleColor.Yellow);
-            Console.WriteLine($"Uptime: {uptimeHour:D2}:{uptimeMinute:D2}:{uptimeSecond:D2}", ConsoleColor.Yellow);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("System Specifications:");
+            Console.WriteLine($"CPU: {CPU.GetCPUBrandString()}");
+            Console.WriteLine($"CPU Cores: {CPU.GetCPUCycleSpeed()}");
+            Console.WriteLine($"RAM: {usedmem}/{maxmem}MB");
+            Console.WriteLine($"Resolution: {Console.WindowWidth} x {Console.WindowHeight}");
 
-            // Check for null before accessing BootTime
-            //if (Kernel.BootTime != DateTime.MinValue)
-            //{
-            //    Console.WriteLine($"Time at boot: {DateTime.Now}", ConsoleColor.Yellow);
-            //    TimeSpan uptime = DateTime.Now - Kernel.BootTime;
-            //    Console.WriteLine($"Uptime: {uptime.Days} days, {uptime.Hours} hours, {uptime.Minutes} minutes", ConsoleColor.Yellow);
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Error retrieving boot time.", ConsoleColor.Red);
-            //}
-            //TimeSpan uptime = DateTime.Now - Kernel.BootTime;
-            //Console.WriteLine($"Uptime: {uptime.Days} days, {uptime.Hours} hours, {uptime.Minutes} minutes", ConsoleColor.Yellow);
+            // Check if the system is virtualized (based on user configuration)
+            Console.WriteLine($"Is Virtualized: {IsVirtualized}");
+
+            Console.WriteLine($"Time at boot: {Kernel.bootTime}");
+            Console.WriteLine($"Uptime: {uptimeHour:D2}:{uptimeMinute:D2}:{uptimeSecond:D2}");
+            //Console.WriteLine($"Hostname: {hostname}");
+            Console.WriteLine("Kernel Version: 1.0.0");
+            Console.ResetColor();
         }
         
     }

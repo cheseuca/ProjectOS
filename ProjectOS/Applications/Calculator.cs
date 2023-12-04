@@ -64,7 +64,7 @@ namespace ProjectOS.Applications
                 else if (user_input == "2")
                 {
                     System.Console.Clear();
-                    System.Console.WriteLine("Welcome to ProjectOS\nType \"help\" for a list of commands");
+                    Kernel.DisplayDefaultMessage();
                 }
                 }
             else

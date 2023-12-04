@@ -40,9 +40,9 @@ namespace ProjectOS
 
             Console.Clear();
             
-            Console.WriteLine("\r\n     _    _      _                           \r\n    | |  | |    | |                          \r\n    | |  | | ___| | ___ ___  _ __ ___   ___  \r\n    | |/\\| |/ _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ \r\n    \\  /\\  /  __/ | (_| (_) | | | | | |  __/ \r\n     \\/  \\/ \\___|_|\\___\\___/|_| |_| |_|\\___| \r\n                                             \r\n                                             \r\n                  _____                      \r\n                 |_   _|                     \r\n                  | | ___                   \r\n                   | |/ _ \\                  \r\n                   | | (_) |                 \r\n                   \\_/\\___/                  \r\n                                             \r\n                                             \r\n      ______                _____ _____      \r\n      | ___ \\              |  _  /  ___|     \r\n      | |_/ /__ _ _ __ ___ | | | \\ `--.      \r\n      |    // _` | '_ ` _ \\| | | |`--. \\     \r\n      | |\\ \\ (_| | | | | | \\ \\_/ /\\__/ /     \r\n      \\_| \\_\\__,_|_| |_| |_|\\___/\\____/      \r\n                                             \r\n                                            \r\n");
+            DisplayWelcomeMessage();
 
-            Console.WriteLine("Type 'help' for a list of commands\n");
+            
         }
 
         protected override void Run()
@@ -54,14 +54,22 @@ namespace ProjectOS
             string passwordInput = ReadPasswordInput();
 
             if (AuthenticateUser(usernameInput, passwordInput))
-            {
-                Console.WriteLine("Authentication successful!");
+            {   
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Authentication successful!\n");
+                Console.ResetColor();
+
+                //add a delay before it clears the screen
+                System.Threading.Thread.Sleep(1000);
+                Console.Clear();
+
+                DisplayDefaultMessage();
 
                 // Continue with the rest of the code or execute specific commands for authenticated users
                 while (true)
                 {
                     String response;
-                    Console.Write(">: ");
+                    Console.Write(File.currentDirectory);
                     String input = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(input))
                     {
@@ -73,11 +81,13 @@ namespace ProjectOS
             }
             else
             {
-                Console.WriteLine("Authentication failed. Please try again.");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Authentication failed. Please try again.\n");
+                Console.ResetColor();
             }
         }
 
-        private string ReadPasswordInput()
+        private static string ReadPasswordInput()
         {
             StringBuilder password = new StringBuilder();
             ConsoleKeyInfo key;
@@ -112,7 +122,38 @@ namespace ProjectOS
             return username == "admin" && password == "adminisme";
         }
 
+        private void DisplayWelcomeMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            TypeWithDelay("\r\n      _      __        __                           \r\n     | | /| / / ___   / / ____ ___   __ _  ___      \r\n     | |/ |/ / / -_) / / / __// _ \\ /  ' \\/ -_)     \r\n     |__/|__/  \\__/ /_/  \\__/ \\___//_/_/_/\\__/      \r\n                    ______                          \r\n                   /_  __/ ___                      \r\n                    / /   / _ \\                     \r\n            ___    /_/    \\___/____    ____         \r\n           / _ \\ ___ _  __ _  / __ \\  / __/         \r\n          / , _// _ `/ /  ' \\/ /_/ / _\\ \\           \r\n         /_/|_| \\_,_/ /_/_/_/\\____/ /___/           \r\n                                                    \r\n", delayMilliseconds: 1);
+            //Console.WriteLine("");
+            Console.ResetColor();
+            TypeWithDelay("=================================================", delayMilliseconds: 10);
+            TypeWithDelay("Type your username and password to log in.", delayMilliseconds: 10);
+            TypeWithDelay("For demonstration purposes, use 'admin' \nas the username and 'adminisme' as the password.", delayMilliseconds: 10);
+            TypeWithDelay("=================================================", delayMilliseconds: 10);
+            Console.WriteLine();
+        }
 
+        private void TypeWithDelay(string text, int delayMilliseconds)
+        {
+            foreach (char c in text)
+            {
+                Console.Write(c);
+                System.Threading.Thread.Sleep(delayMilliseconds);
+            }
+            Console.WriteLine(); // Move to the next line after typing is complete
+        }
 
+        public static void DisplayDefaultMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("\r\n      _      __        __                           \r\n     | | /| / / ___   / / ____ ___   __ _  ___      \r\n     | |/ |/ / / -_) / / / __// _ \\ /  ' \\/ -_)     \r\n     |__/|__/  \\__/ /_/  \\__/ \\___//_/_/_/\\__/      \r\n                    ______                          \r\n                   /_  __/ ___                      \r\n                    / /   / _ \\                     \r\n            ___    /_/    \\___/____    ____         \r\n           / _ \\ ___ _  __ _  / __ \\  / __/         \r\n          / , _// _ `/ /  ' \\/ /_/ / _\\ \\           \r\n         /_/|_| \\_,_/ /_/_/_/\\____/ /___/           \r\n                                                    \r\n");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Type 'help' for a list of commands\n");
+            Console.ResetColor();
+        }
     }
 }

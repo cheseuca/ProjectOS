@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cosmos.HAL;
+using ProjectOS;
 
 namespace ProjectOS.Commands{
     public class Command{
@@ -11,7 +13,8 @@ namespace ProjectOS.Commands{
         public readonly string name;
 
         public static SysInfo info;
-        
+
+        //Kernel DefaultMessage = new Kernel();
         public Command(string name)
         {
             this.name = name;
@@ -34,7 +37,7 @@ namespace ProjectOS.Commands{
             clear       To clear the text
             restart     To reboot
             shutdown    To turn off the system
-            version     To show the current verion
+            Sysinfo     To show the system info
             
             file        file manamgement
             input: file + command
@@ -56,14 +59,15 @@ namespace ProjectOS.Commands{
         }
     }
 
-    internal class Clear : Command
+    public class Clear : Command
     {
         public Clear(String name) : base(name) { }
 
         public override String execute(String[] args)
         {
             Console.Clear();
-            return "Welcome to ProjectOS\nType \"help\" for a list of commands";
+            Kernel.DisplayDefaultMessage();
+            return "Console cleared.";
         }
     }
 
@@ -76,7 +80,8 @@ namespace ProjectOS.Commands{
             String response = "Restarting the system...";
             Console.WriteLine(response);
             Cosmos.System.Power.Reboot();
-            return "Welcome to ProjectOS\nType \"help\" for a list of commands";
+            Kernel.DisplayDefaultMessage();
+            return "";
         }
     }
 
@@ -88,15 +93,6 @@ namespace ProjectOS.Commands{
         {
             Cosmos.System.Power.Shutdown();
             return "Shutting down the system...";
-        }
-    }
-
-    internal class Version : Command
-    {
-        public Version(String name) : base(name) { }
-        public override String execute(String[] args)
-        {
-            return "ProjectOS v1.0.0";
         }
     }
 

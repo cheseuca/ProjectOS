@@ -15,13 +15,12 @@ namespace ProjectOS.Commands
             this.commands.Add(new Help("help"));
             this.commands.Add(new ShutDown("shutdown"));
             this.commands.Add(new Restart("restart"));
-            this.commands.Add(new Version("version"));
             this.commands.Add(new Clear("clear"));
+            this.commands.Add(new getSysInfo("sysinfo"));
             this.commands.Add(new File("file"));
             this.commands.Add(new Directory("dir"));
             this.commands.Add(new ConsoleForeground("foreground"));
             this.commands.Add(new ConsoleBackground("background"));
-            this.commands.Add(new getSysInfo("sysinfo"));
             this.commands.Add(new Applications.Calc("calc"));
             this.commands.Add(new Applications.Hangman("hangman"));
             this.commands.Add(new Applications.NumberGuessingGame("feelinglucky"));

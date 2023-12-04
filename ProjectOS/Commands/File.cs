@@ -13,7 +13,7 @@ namespace ProjectOS.Commands
 {
     internal class File : Command
     {
-        public string currentDirectory = @"0:\";
+        public static string currentDirectory = @"0:\";
         public File(String name) : base(name)
         {
             //this.description = "Create a file";
