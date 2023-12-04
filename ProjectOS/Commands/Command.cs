@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cosmos.HAL;
 
 namespace ProjectOS.Commands{
     public class Command{
@@ -107,6 +108,21 @@ namespace ProjectOS.Commands{
         {
             Command.info = new SysInfo();
             return "System Info Generated";
+        }
+    }
+
+    internal class DateTime : Command
+    {
+        public DateTime(String name) : base(name) { }
+
+        public override string execute(string[] args)
+        {
+            int hour = RTC.Hour;
+            int minute = RTC.Minute;
+            int second = RTC.Second;
+            string date = RTC.DayOfTheMonth.ToString() + "/" + RTC.Month.ToString() + "/" + RTC.Year.ToString();
+            string formattedDateTime = $"Current Time: {hour:D2}:{minute:D2}:{second:D2}" + "\n" + "Current Date: " +date;
+            return formattedDateTime;
         }
     }
 }
