@@ -32,23 +32,47 @@ namespace ProjectOS.Commands
                 case "cd":
                     try
                     {
-                        if (args.Length >= 2 && args[0].ToLower() == "cd")
+                        if (args.Length == 2 && args[0].ToLower() == "cd")
                         {
-                            string newDirectory = Path.Combine(currentDirectory, args[1]);
-                            if (Sys.FileSystem.VFS.VFSManager.DirectoryExists(newDirectory))
+                            string targetDirectory = args[1];
+
+                            // Check for special case: cd ..
+                            if (targetDirectory == "..")
                             {
-                                // Update the current directory globally for the class
-                                currentDirectory = newDirectory;
-                                response = "Current directory changed to: " + currentDirectory;
+                                // Get the parent directory
+                                string parentDirectory = Path.GetDirectoryName(currentDirectory);
+
+                                // Check if the parent directory is not null (not at the root)
+                                if (!string.IsNullOrEmpty(parentDirectory))
+                                {
+                                    // Update the current directory globally for the class
+                                    currentDirectory = parentDirectory;
+                                    response = "Current directory changed to: " + currentDirectory;
+                                }
+                                else
+                                {
+                                    response = "Already at the root directory. Cannot go back further.";
+                                }
                             }
                             else
                             {
-                                response = "Directory does not exist: " + newDirectory;
+                                // Normal cd command
+                                string newDirectory = Path.Combine(currentDirectory, targetDirectory);
+                                if (Sys.FileSystem.VFS.VFSManager.DirectoryExists(newDirectory))
+                                {
+                                    // Update the current directory globally for the class
+                                    currentDirectory = newDirectory;
+                                    response = "Current directory changed to: " + currentDirectory;
+                                }
+                                else
+                                {
+                                    response = "Directory does not exist: " + newDirectory;
+                                }
                             }
                         }
                         else
                         {
-                            response = "Invalid 'cd' command format. Usage: file cd <directory>";
+                            response = "Invalid 'cd' command format. Usage: file cd <directory> or file cd ..";
                         }
                     }
                     catch (Exception ex)
