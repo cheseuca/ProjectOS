@@ -27,7 +27,7 @@ namespace ProjectOS.Applications
         string op;
         public Calculator()
         {
-            string result = "=\t ";
+            string result = "Calculated Answer =\t ";
             CalculatorCLI();
 
             switch (op)
