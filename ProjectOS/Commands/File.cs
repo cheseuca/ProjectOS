@@ -13,6 +13,7 @@ namespace ProjectOS.Commands
 {
     internal class File : Command
     {
+        // ignore comment 
         public static string currentDirectory = @"0:\";
         public File(String name) : base(name)
         {
@@ -85,31 +86,71 @@ namespace ProjectOS.Commands
                 case "mkfile":
                     try
                     {
-                        Sys.FileSystem.VFS.VFSManager.CreateFile(Path.Combine(currentDirectory, args[1]));
-                        response = "Your file \"" + args[1] + "\" has been created";
+                        string filePath;
+
+                        // Check if arguments are provided
+                        if (args.Length > 1)
+                        {
+                            // If arguments are provided, use the specified file path
+                            filePath = args[1];
+
+                            // If the file path is not a full path, combine with the current directory
+                            if (!filePath.Contains(":\\"))
+                            {
+                                filePath = Path.Combine(currentDirectory, filePath);
+                            }
+                        }
+                        else
+                        {
+                            // If no arguments are provided, display an error message
+                            response = "Error: Please specify a file to create.";
+                            break;
+                        }
+
+                        Sys.FileSystem.VFS.VFSManager.CreateFile(filePath);
+                        response = "Your file \"" + filePath + "\" has been created";
                     }
                     catch (Exception ex)
                     {
                         response = ex.ToString();
-                        break;
-                        //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
+
 
                 // remove file from a directory
                 case "rmfile":
                     try
                     {
-                        Sys.FileSystem.VFS.VFSManager.DeleteFile(args[1]);
-                        response = "Your file \"" + args[1] + "\" has been deleted";
+                        string filePath;
+
+                        // Check if arguments are provided
+                        if (args.Length > 1)
+                        {
+                            // If arguments are provided, use the specified file path
+                            filePath = args[1];
+
+                            // If the file path is not a full path, combine with the current directory
+                            if (!filePath.Contains(":\\"))
+                            {
+                                filePath = Path.Combine(currentDirectory, filePath);
+                            }
+                        }
+                        else
+                        {
+                            // If no arguments are provided, display an error message
+                            response = "Error: Please specify a file to delete.";
+                            break;
+                        }
+
+                        Sys.FileSystem.VFS.VFSManager.DeleteFile(filePath);
+                        response = "Your file \"" + filePath + "\" has been deleted";
                     }
                     catch (Exception ex)
                     {
                         response = ex.ToString();
-                        break;
-                        //response = "Your file \"" + args[1] + "\" could not be created";
                     }
                     break;
+
 
                 // create directory
                 case "mkdir":
@@ -256,94 +297,6 @@ namespace ProjectOS.Commands
                     }
                     break;
 
-                //// show list of directories in disk
-                //case "lsdir":
-                //    try
-                //    {
-                //        List<Cosmos.System.FileSystem.Listing.DirectoryEntry> entryList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
-
-                //        // Filter directories and select only their names
-                //        List<string> directoryNames = entryList
-                //            .Where(entry => entry.mEntryType == Cosmos.System.FileSystem.Listing.DirectoryEntryTypeEnum.Directory)
-                //            .Select(entry => entry.mName)
-                //            .ToList();
-
-                //        Console.WriteLine("Directory list: {0}:", args[1]);
-                //        Console.WriteLine(new string('=', 73));
-
-                //        foreach (var dirName in directoryNames)
-                //        {
-                //            Console.WriteLine($"=   > {dirName}");
-                //        }
-
-                //        Console.WriteLine(new string('=', 73));
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        response = ex.ToString();
-                //        break;
-                //    }
-                //    break;
-
-                //case "lsfile":
-                //    try
-                //    {
-                //        if (args.Length == 1)
-                //        {
-                //            // No directory specified, show current directory files
-                //            var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(currentDirectory);
-
-                //            Console.WriteLine("File list in current directory:");
-                //            Console.WriteLine(new string('=', 73));
-
-                //            foreach (var fileEntry in fileList)
-                //            {
-                //                if (fileEntry.mEntryType == Cosmos.System.FileSystem.Listing.DirectoryEntryTypeEnum.File)
-                //                {
-                //                    Console.WriteLine($"=   > {fileEntry.mName}");
-                //                }
-                //            }
-
-                //            Console.WriteLine(new string('=', 73));
-                //        }
-                //        else if (args.Length == 2)
-                //        {
-                //            // Directory specified, show files in that directory
-                //            string targetDirectory = args[1];
-                //            if (!targetDirectory.Contains(":\\"))
-                //            {
-                //                // If the target directory is not a full path, combine with the current directory
-                //                targetDirectory = Path.Combine(currentDirectory, targetDirectory);
-                //            }
-
-                //            var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(targetDirectory);
-
-                //            Console.WriteLine($"File list in directory: {targetDirectory}:");
-                //            Console.WriteLine(new string('=', 73));
-
-                //            foreach (var fileEntry in fileList)
-                //            {
-                //                if (fileEntry.mEntryType == Cosmos.System.FileSystem.Listing.DirectoryEntryTypeEnum.File)
-                //                {
-                //                    Console.WriteLine($"=   > {fileEntry.mName}");
-                //                }
-                //            }
-
-                //            Console.WriteLine(new string('=', 73));
-                //        }
-                //        else
-                //        {
-                //            // Incorrect number of arguments
-                //            Console.WriteLine("Usage: file lsfile [directory]");
-                //        }
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        response = ex.ToString();
-                //    }
-                //    break;
-
-                // show list of directories in disk
                 case "lsdir":
                     try
                     {
