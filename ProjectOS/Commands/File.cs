@@ -198,31 +198,84 @@ namespace ProjectOS.Commands
                     }
                     break;
 
+                //// show list of files in directory
+                //case "lsfile":
+                //    try
+                //    {
+                //        var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
+
+                //        Console.WriteLine("File list in directory: {0}:", args[1]);
+                //        Console.WriteLine(new string('=', 73));
+
+                //        foreach (var fileEntry in fileList)
+                //        {
+                //            if (fileEntry.mEntryType == Cosmos.System.FileSystem.Listing.DirectoryEntryTypeEnum.File)
+                //            {
+                //                Console.WriteLine($"=   > {fileEntry.mName}");
+                //            }
+                //        }
+
+                //        Console.WriteLine(new string('=', 73));
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        response = ex.ToString();
+                //        break;
+                //    }
+                //    break;
+
                 // show list of files in directory
                 case "lsfile":
                     try
                     {
-                        var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
-
-                        Console.WriteLine("File list in directory: {0}:", args[1]);
-                        Console.WriteLine(new string('=', 73));
-
-                        foreach (var fileEntry in fileList)
+                        if (args.Length == 1)
                         {
-                            if (fileEntry.mEntryType == Cosmos.System.FileSystem.Listing.DirectoryEntryTypeEnum.File)
-                            {
-                                Console.WriteLine($"=   > {fileEntry.mName}");
-                            }
-                        }
+                            // No directory specified, show current directory files
+                            var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(currentDirectory);
 
-                        Console.WriteLine(new string('=', 73));
+                            Console.WriteLine("File list in current directory:");
+                            Console.WriteLine(new string('=', 73));
+
+                            foreach (var fileEntry in fileList)
+                            {
+                                if (fileEntry.mEntryType == Cosmos.System.FileSystem.Listing.DirectoryEntryTypeEnum.File)
+                                {
+                                    Console.WriteLine($"=   > {fileEntry.mName}");
+                                }
+                            }
+
+                            Console.WriteLine(new string('=', 73));
+                        }
+                        else if (args.Length == 2)
+                        {
+                            // Directory specified, show files in that directory
+                            var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
+
+                            Console.WriteLine($"File list in directory: {args[1]}:");
+                            Console.WriteLine(new string('=', 73));
+
+                            foreach (var fileEntry in fileList)
+                            {
+                                if (fileEntry.mEntryType == Cosmos.System.FileSystem.Listing.DirectoryEntryTypeEnum.File)
+                                {
+                                    Console.WriteLine($"=   > {fileEntry.mName}");
+                                }
+                            }
+
+                            Console.WriteLine(new string('=', 73));
+                        }
+                        else
+                        {
+                            // Incorrect number of arguments
+                            Console.WriteLine("Usage: file lsfile [directory]");
+                        }
                     }
                     catch (Exception ex)
                     {
                         response = ex.ToString();
-                        break;
                     }
                     break;
+
 
                 // change directory 
                 case "cd":
