@@ -11,7 +11,7 @@ namespace ProjectOS.Commands
         public CommandManager()
         {   
             // ignore this
-            commands = new List<Command>(12);
+            commands = new List<Command>(13);
             this.commands.Add(new Help("help"));
             this.commands.Add(new ShutDown("shutdown"));
             this.commands.Add(new Restart("restart"));
@@ -23,6 +23,7 @@ namespace ProjectOS.Commands
             this.commands.Add(new Applications.Calc("calc"));
             this.commands.Add(new Applications.Hangman("hangman"));
             this.commands.Add(new Applications.NumberGuessingGame("feelinglucky"));
+            // this.commands.Add(new Applications.TicTacToe("xoxo"));
             this.commands.Add(new DateTime ("datetime"));
         }
 
