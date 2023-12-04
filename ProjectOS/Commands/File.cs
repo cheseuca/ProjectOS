@@ -13,6 +13,7 @@ namespace ProjectOS.Commands
 {
     internal class File : Command
     {
+        public string currentDirectory = @"0:\";
         public File(String name) : base(name)
         {
             //this.description = "Create a file";
@@ -22,11 +23,40 @@ namespace ProjectOS.Commands
         {
 
             String response = "";
-            string currentDirectory = @"0:\";
+            // string currentDirectory = @"0:\";
 
             //file commands 
             switch (args[0])
             {
+                // change directory 
+                case "cd":
+                    try
+                    {
+                        if (args.Length >= 2 && args[0].ToLower() == "cd")
+                        {
+                            string newDirectory = Path.Combine(currentDirectory, args[1]);
+                            if (Sys.FileSystem.VFS.VFSManager.DirectoryExists(newDirectory))
+                            {
+                                // Update the current directory globally for the class
+                                currentDirectory = newDirectory;
+                                response = "Current directory changed to: " + currentDirectory;
+                            }
+                            else
+                            {
+                                response = "Directory does not exist: " + newDirectory;
+                            }
+                        }
+                        else
+                        {
+                            response = "Invalid 'cd' command format. Usage: file cd <directory>";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        response = "Exception: " + ex.Message;
+                    }
+                    break;
+
                 // create file
                 case "mkfile":
                     try
@@ -249,9 +279,16 @@ namespace ProjectOS.Commands
                         else if (args.Length == 2)
                         {
                             // Directory specified, show files in that directory
-                            var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(args[1]);
+                            string targetDirectory = args[1];
+                            if (!targetDirectory.Contains(":\\"))
+                            {
+                                // If the target directory is not a full path, combine with the current directory
+                                targetDirectory = Path.Combine(currentDirectory, targetDirectory);
+                            }
 
-                            Console.WriteLine($"File list in directory: {args[1]}:");
+                            var fileList = Sys.FileSystem.VFS.VFSManager.GetDirectoryListing(targetDirectory);
+
+                            Console.WriteLine($"File list in directory: {targetDirectory}:");
                             Console.WriteLine(new string('=', 73));
 
                             foreach (var fileEntry in fileList)
@@ -276,34 +313,6 @@ namespace ProjectOS.Commands
                     }
                     break;
 
-
-                // change directory 
-                case "cd":
-                    try
-                    {
-                        if (args.Length >= 2 && args[0].ToLower() == "cd")
-                        {
-                            string newDirectory = Path.Combine(currentDirectory, args[1]);
-                            if (Sys.FileSystem.VFS.VFSManager.DirectoryExists(newDirectory))
-                            {
-                                currentDirectory = newDirectory;
-                                response = "Current directory changed to: " + currentDirectory;
-                            }
-                            else
-                            {
-                                response = "Directory does not exist: " + newDirectory;
-                            }
-                        }
-                        else
-                        {
-                            response = "Invalid 'cd' command format. Usage: file cd <directory>";
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        response = "Exception: " + ex.Message;
-                    }
-                    break;
 
                 // move the file from default directory to another directory
                 case "mvfile":
