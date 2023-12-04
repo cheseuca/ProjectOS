@@ -13,7 +13,6 @@ namespace ProjectOS.Commands
 {
     internal class File : Command
     {
-        // ignore comment again just for push 
         // ignore comment 
         public static string currentDirectory = @"0:\";
         public File(String name) : base(name)
