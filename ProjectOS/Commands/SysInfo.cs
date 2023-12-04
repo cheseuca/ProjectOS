@@ -27,7 +27,7 @@ namespace ProjectOS.Commands
 
 
         public SysInfo()
-            {
+        {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("System Specifications:");
@@ -41,8 +41,8 @@ namespace ProjectOS.Commands
 
             Console.WriteLine($"Time at boot: {Kernel.bootTime}");
             Console.WriteLine($"Uptime: {uptimeHour:D2}:{uptimeMinute:D2}:{uptimeSecond:D2}");
-            //Console.WriteLine($"Hostname: {hostname}");
             Console.WriteLine("Kernel Version: 1.0.0");
+            Console.WriteLine();
             Console.ResetColor();
         }
         

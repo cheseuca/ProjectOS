@@ -11,14 +11,13 @@ namespace ProjectOS.Commands
         public CommandManager()
         {   
             // ignore this
-            commands = new List<Command>(8);
+            commands = new List<Command>(12);
             this.commands.Add(new Help("help"));
             this.commands.Add(new ShutDown("shutdown"));
             this.commands.Add(new Restart("restart"));
             this.commands.Add(new Clear("clear"));
             this.commands.Add(new getSysInfo("sysinfo"));
             this.commands.Add(new File("file"));
-            this.commands.Add(new Directory("dir"));
             this.commands.Add(new ConsoleForeground("foreground"));
             this.commands.Add(new ConsoleBackground("background"));
             this.commands.Add(new Applications.Calc("calc"));

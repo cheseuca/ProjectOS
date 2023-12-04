@@ -69,7 +69,7 @@ namespace ProjectOS
                 while (true)
                 {
                     String response;
-                    Console.Write(File.currentDirectory);
+                    Console.Write("$" + File.currentDirectory +">");
                     String input = Console.ReadLine();
                     if (string.IsNullOrWhiteSpace(input))
                     {
