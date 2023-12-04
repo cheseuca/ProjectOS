@@ -37,25 +37,26 @@ namespace ProjectOS.Commands{
             clear       To clear the text
             restart     To reboot
             shutdown    To turn off the system
-            Sysinfo     To show the system info
+            sysinfo     To show the system info
+            foreground  To change the foreground color 
+            background  To change the background color
             
             file        file manamgement
             input: file + command
 
             command:
-            mkfile      make file 
-            mkdir       make directory
-            rmfile      remove file
-            rmdir       remove directory
-            writestr    write in a text file
-            readstr     read text file
-            space       read remaining space
-            lsdir       list of directories
-            lsfile      list of files in the directory
+            cd           change directory    |  mkfile      make file 
+            rmdir        remove directory    |  rmfile      remove file
+            writestr     write a text file   |  mvfile      move file
+            space        remaining space     |  readstr     read text file
+            lsdir        list of directories |  mkdir       make directory
+            lsfile       list of files       | 
             
-            calc        to open the calculator application";
-
-
+            
+            calc         open the calculator app
+            hangman      play hangman
+            feelinglucky play guess the number
+            xoxo         play tictactoe";
         }
     }
 
