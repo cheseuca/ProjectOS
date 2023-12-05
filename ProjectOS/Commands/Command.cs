@@ -42,7 +42,7 @@ namespace ProjectOS.Commands{
             background  To change the background color
             
             file        file manamgement
-            input: file + command
+            input:      file + command
 
             command:
             cd           change directory    |  mkfile      make file 
@@ -52,11 +52,11 @@ namespace ProjectOS.Commands{
             lsdir        list of directories |  mkdir       make directory
             lsfile       list of files       | 
             
-            
             calc         open the calculator app
             hangman      play hangman
             feelinglucky play guess the number
-            xoxo         play tictactoe";
+            xoxo         play tictactoe
+            wordle       play wordle";
         }
     }
 
